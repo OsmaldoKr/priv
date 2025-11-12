@@ -1,9 +1,20 @@
-/* Estilos base y fuente */
-body, html {
+/* Colores pastel */
+:root {
+  --color-fondo: #fff8f0;
+  --color-primario: #f9c5c5;
+  --color-secundario: #c9e4de;
+  --color-acento: #f7d6bf;
+  --color-texto: #5a5a5a;
+  --color-titulo: #a97c7c;
+}
+
+/* Estilos globales */
+body {
+  font-family: 'Merriweather', serif;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
   margin: 0;
   padding: 0;
-  font-family: 'Merriweather', serif;
-  background: linear-gradient(135deg, #ffcbf2, #a5aaff 90%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,165 +22,175 @@ body, html {
 }
 
 .contenedor-principal {
-  width: 100%;
-  max-width: 420px;
-  padding: 1rem 1.5rem;
-  text-align: center;
-  color: #38304d;
+  max-width: 700px;
+  width: 95%;
+  padding: 1em;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  overflow: hidden;
 }
 
 /* Título principal */
 .titulo-principal {
   font-family: 'Great Vibes', cursive;
-  font-size: 2.4rem;
-  color: #d72660;
-  margin-bottom: 1rem;
+  color: var(--color-primario);
+  font-size: 3em;
+  text-align: center;
+  margin-bottom: 0.5em;
 }
 
-/* Contenedor del minilibro */
+/* Mini libro */
 .minilibro-contenedor {
   position: relative;
-  background: #fff0f6;
-  border-radius: 18px;
-  box-shadow: 0 10px 30px rgba(190, 0, 60, 0.15);
-  padding: 2rem 2rem 3rem;
-  height: 320px;
-  overflow: hidden;
-  text-align: left;
+  background-color: var(--color-acento);
+  border-radius: 12px;
+  padding: 1.5em;
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.1);
+  min-height: 400px;
 }
 
-/* Páginas */
+/* indicador de página */
+.indicador {
+  font-weight: 700;
+  font-size: 1em;
+  color: var(--color-titulo);
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+/* Páginas del mini libro */
 .minilibro-pagina {
   display: none;
-  height: 100%;
-  max-height: 280px;
-  overflow-y: auto;
-  padding-right: 10px; /* espacio para scroll */
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch; /* para que scroll en iOS sea suave */
+  animation: fadeInSlide 0.6s ease forwards;
+  min-height: 220px;
 }
 
+/* La página visible */
 .minilibro-pagina.visible {
   display: block;
 }
 
+/* Animación para transición suave */
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 /* Imágenes decorativas */
 .decoracion {
-  position: absolute;
-  max-width: 50px;
-  opacity: 0.7;
-  user-select: none;
-  pointer-events: none;
-  top: 16px;
-  left: 12px;
-  animation: balanceo 4s ease-in-out infinite;
+  max-width: 120px;
+  height: auto;
+  margin-bottom: 1em;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .decoracion.centro {
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 180px;
+  margin-bottom: 1em;
 }
 
-/* Animación balanceo */
-@keyframes balanceo {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-8px) rotate(6deg);
-  }
+.decoracion.izquierda {
+  float: left;
+  margin-right: 1em;
+  margin-bottom: 0.5em;
+}
+
+/* Textos portadas */
+.portada-titulo {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.5em;
+  color: var(--color-primario);
+  text-align: center;
+  margin: 0.3em 0;
+}
+
+.portada-sub {
+  font-style: italic;
+  text-align: center;
+  margin-bottom: 0.5em;
+  color: var(--color-titulo);
+}
+
+.firma, .firma-final {
+  text-align: center;
+  font-weight: 700;
+  margin-top: 1em;
+  color: var(--color-titulo);
+}
+
+.firma-final {
+  font-size: 1.2em;
+}
+
+/* Listas dentro del libro */
+.minilibro-pagina ul {
+  padding-left: 1em;
+  margin: 0.5em 0;
+}
+
+.minilibro-pagina li {
+  margin-bottom: 0.6em;
+  font-weight: 600;
+  color: var(--color-titulo);
 }
 
 /* Botones */
 .botones {
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
-.botones button,
-.flecha-abajo {
-  background-color: #d72660;
-  border: none;
-  color: white;
-  font-size: 1.6rem;
-  padding: 12px 22px;
-  border-radius: 12px;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(215, 38, 96, 0.6);
-  transition: background-color 0.3s ease;
-  user-select: none;
-}
-
-.botones button:hover:not(:disabled),
-.flecha-abajo:hover {
-  background-color: #b31e4b;
-}
-
-.botones button:disabled {
-  background-color: #f1b9d7;
-  cursor: not-allowed;
-}
-
-.flecha-abajo {
-  margin: 10px auto 0;
-  display: block;
-  width: 50px;
-  height: 50px;
-  font-size: 2.2rem;
-  line-height: 48px;
   text-align: center;
-  border-radius: 50%;
+  margin-top: 1em;
 }
 
-/* Estilos para listas y textos */
-.minilibro-pagina p,
-.minilibro-pagina ul {
-  margin-bottom: 1rem;
-  line-height: 1.4;
+.botones button {
+  background-color: var(--color-primario);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  margin: 0 1em;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.minilibro-pagina ul {
-  padding-left: 20px;
+.botones button:hover,
+.botones button:focus {
+  background-color: var(--color-secundario);
+  outline: none;
+  color: var(--color-texto);
 }
 
-.minilibro-pagina li {
-  margin-bottom: 0.6rem;
+/* Flecha abajo pequeño botón */
+.flecha-abajo {
+  display: block;
+  margin: 1em auto 0 auto;
+  background: transparent;
+  border: none;
+  font-size: 2em;
+  color: var(--color-secundario);
+  cursor: pointer;
+  transition: color 0.3s ease;
 }
 
-/* Texto de firma */
-.firma, .firma-final {
-  font-family: 'Great Vibes', cursive;
-  color: #7b2ff2;
-  font-size: 1.1rem;
-  margin-top: 1rem;
-  text-align: right;
+.flecha-abajo:hover,
+.flecha-abajo:focus {
+  color: var(--color-primario);
+  outline: none;
 }
 
-/* Responsive */
-@media (max-width: 450px) {
-  .contenedor-principal {
-    padding: 1rem;
-  }
-
-  .minilibro-contenedor {
-    height: auto;
-    max-height: 320px;
-  }
-
-  .botones {
-    flex-wrap: wrap;
-  }
-
-  .botones button,
-  .flecha-abajo {
-    width: 48%;
-    margin-bottom: 10px;
-  }
-
-  .decoracion {
-    max-width: 40px;
-  }
+/* Limpieza de floats */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
 }
