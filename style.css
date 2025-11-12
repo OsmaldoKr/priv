@@ -1,190 +1,175 @@
-* { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --bg1: #FFF6F0;
-  --bg2: #F7EDE7;
-  --accent: #B35C6A;
-  --text: #2f2f2f;
-}
-
-body {
+/* Estilos base y fuente */
+body, html {
+  margin: 0;
+  padding: 0;
   font-family: 'Merriweather', serif;
-  background: linear-gradient(180deg, #ffe9e9 0%, #fffdf9 100%);
+  background: linear-gradient(135deg, #ffcbf2, #a5aaff 90%);
   display: flex;
-  align-items: center;
   justify-content: center;
-  padding: 30px;
+  align-items: center;
   min-height: 100vh;
-  color: var(--text);
-  overflow-x: hidden;
 }
 
 .contenedor-principal {
-  max-width: 900px;
   width: 100%;
+  max-width: 420px;
+  padding: 1rem 1.5rem;
   text-align: center;
+  color: #38304d;
 }
 
+/* Título principal */
 .titulo-principal {
   font-family: 'Great Vibes', cursive;
-  color: var(--accent);
-  font-size: clamp(36px, 6vw, 72px);
-  margin-bottom: 20px;
-  text-shadow: 0 2px 8px rgba(179, 92, 106, 0.3);
+  font-size: 2.4rem;
+  color: #d72660;
+  margin-bottom: 1rem;
 }
 
-/* ==== Libro ==== */
+/* Contenedor del minilibro */
 .minilibro-contenedor {
   position: relative;
-  background: white;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  background: #fff0f6;
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(190, 0, 60, 0.15);
+  padding: 2rem 2rem 3rem;
+  height: 320px;
   overflow: hidden;
-  width: 100%;
-  max-width: 100%;
-  aspect-ratio: 3/2;
+  text-align: left;
 }
 
+/* Páginas */
 .minilibro-pagina {
-  position: absolute;
-  inset: 0;
-  padding: 40px 50px;
-  background: linear-gradient(180deg, var(--bg1), var(--bg2));
-  opacity: 0;
-  transform: translateX(50%) scale(0.95);
-  transition: all 0.7s ease;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  text-align: justify;
-  overflow-y: visible;
+  display: none;
+  height: 100%;
+  max-height: 280px;
+  overflow-y: auto;
+  padding-right: 10px; /* espacio para scroll */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* para que scroll en iOS sea suave */
 }
 
 .minilibro-pagina.visible {
-  opacity: 1;
-  transform: translateX(0) scale(1);
-  z-index: 2;
+  display: block;
 }
 
-.minilibro-pagina.saliente {
-  opacity: 0;
-  transform: translateX(-50%) scale(0.95);
-  z-index: 1;
-}
-
+/* Imágenes decorativas */
 .decoracion {
-  width: 90px; height: 90px;
-  object-fit: contain;
-  margin-bottom: 20px;
-}
-
-.decoracion.izquierda { align-self: flex-start; margin-bottom: 10px; }
-.decoracion.centro { margin: 0 auto 20px; }
-
-h2 {
-  font-family: 'Great Vibes', cursive;
-  color: var(--accent);
-  font-size: clamp(24px, 4vw, 42px);
-  margin-bottom: 14px;
-  text-align: center;
-  width: 100%;
-}
-
-p, li {
-  font-size: clamp(16px, 2vw, 19px);
-  line-height: 1.7;
-  margin-bottom: 14px;
-}
-
-ul { margin-left: 20px; list-style: none; }
-li::before { content: "💖 "; }
-
-.firma, .firma-final {
-  font-style: italic;
-  margin-top: auto;
-  color: #7a4a52;
-  font-weight: bold;
-  align-self: flex-end;
-}
-
-.firma-final {
-  font-size: 1.2em;
-  color: var(--accent);
-  text-align: right;
-  width: 100%;
-}
-
-.botones {
   position: absolute;
-  bottom: 10px;
+  max-width: 50px;
+  opacity: 0.7;
+  user-select: none;
+  pointer-events: none;
+  top: 16px;
+  left: 12px;
+  animation: balanceo 4s ease-in-out infinite;
+}
+
+.decoracion.centro {
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Animación balanceo */
+@keyframes balanceo {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(6deg);
+  }
+}
+
+/* Botones */
+.botones {
+  margin-top: 15px;
   display: flex;
-  gap: 20px;
-  z-index: 10;
+  justify-content: center;
+  gap: 15px;
 }
 
-button {
+.botones button,
+.flecha-abajo {
+  background-color: #d72660;
   border: none;
-  background: var(--accent);
   color: white;
-  font-size: 22px;
-  padding: 10px 18px;
-  border-radius: 50%;
+  font-size: 1.6rem;
+  padding: 12px 22px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 5px 15px rgba(215, 38, 96, 0.6);
+  transition: background-color 0.3s ease;
+  user-select: none;
 }
 
-button:hover {
-  transform: scale(1.1);
-  background: #d97989;
+.botones button:hover:not(:disabled),
+.flecha-abajo:hover {
+  background-color: #b31e4b;
 }
 
-.indicador {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 14px;
-  background: rgba(255,255,255,0.8);
-  padding: 6px 10px;
-  border-radius: 20px;
-  color: var(--accent);
+.botones button:disabled {
+  background-color: #f1b9d7;
+  cursor: not-allowed;
 }
 
-/* ==== Portada ==== */
-.portada-titulo {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(30px, 6vw, 56px);
-  color: var(--accent);
-  margin-bottom: 12px;
-}
-
-.portada-sub {
-  font-size: clamp(18px, 3vw, 22px);
-  color: #6b3b42;
-  margin-bottom: 20px;
+.flecha-abajo {
+  margin: 10px auto 0;
+  display: block;
+  width: 50px;
+  height: 50px;
+  font-size: 2.2rem;
+  line-height: 48px;
   text-align: center;
+  border-radius: 50%;
 }
 
-/* ==== Responsive ==== */
-@media (max-width: 800px) {
-  body { padding: 10px; }
+/* Estilos para listas y textos */
+.minilibro-pagina p,
+.minilibro-pagina ul {
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.minilibro-pagina ul {
+  padding-left: 20px;
+}
+
+.minilibro-pagina li {
+  margin-bottom: 0.6rem;
+}
+
+/* Texto de firma */
+.firma, .firma-final {
+  font-family: 'Great Vibes', cursive;
+  color: #7b2ff2;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  text-align: right;
+}
+
+/* Responsive */
+@media (max-width: 450px) {
+  .contenedor-principal {
+    padding: 1rem;
+  }
+
   .minilibro-contenedor {
-    aspect-ratio: auto;
-    min-height: 100vh;
-    border-radius: 0;
-    box-shadow: none;
+    height: auto;
+    max-height: 320px;
   }
-  .minilibro-pagina {
-    padding: 25px 20px 100px;
-    overflow-y: visible;
-  }
+
   .botones {
-    position: fixed;
-    bottom: 20px;
-    background: rgba(255,255,255,0.85);
-    padding: 8px 16px;
-    border-radius: 40px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+  }
+
+  .botones button,
+  .flecha-abajo {
+    width: 48%;
+    margin-bottom: 10px;
+  }
+
+  .decoracion {
+    max-width: 40px;
   }
 }
